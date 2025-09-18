@@ -1,0 +1,297 @@
+
+:root {
+    --bg-color: #1a1a2e;
+    --text-color: #e0e0e0;
+    --primary-color: #ff69b4;
+    --highlight-color: #6a0572;
+    --cake-color: #5d3a24;
+    --frosting-color: #f0f0f0;
+    --filling-color: #ff88aa;
+    --candle-color: #fff;
+    --flame-color: #ff9900;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    overflow-x: hidden;
+    position: relative;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    width: 95%;
+    padding: 2.5rem;
+    background-color: rgba(30, 30, 48, 0.7);
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 10;
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+}
+
+p {
+    color: white;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Container para os corações (FUNDO) */
+.hearts-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.heart-bg {
+    position: absolute;
+    bottom: -50px;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    opacity: 0;
+    animation: floatUp 12s linear forwards;
+    text-shadow: 0 0 8px rgba(255, 105, 180, 0.6);
+    will-change: transform, opacity;
+}
+
+@keyframes floatUp {
+    0% { 
+        transform: translateY(0) translateX(0) scale(0.5) rotate(0deg); 
+        opacity: 0; 
+    }
+    5% { 
+        opacity: 0.7; 
+        transform: translateY(0) translateX(0) scale(1) rotate(0deg); 
+    }
+    100% { 
+        transform: translateY(-120vh) translateX(0) scale(1) rotate(360deg); 
+        opacity: 0; 
+    }
+}
+
+/* Bolo */
+.cake-container {
+    width: 250px;
+    height: 200px;
+    position: relative;
+    margin: 2rem auto;
+}
+
+.cake-base {
+    position: absolute;
+    width: 250px;
+    height: 20px;
+    background: var(--cake-color);
+    border-radius: 50%;
+    top: 155px;
+    left: 50%;
+    transform: translateX(-50%) rotateX(80deg);
+}
+
+.cake-layer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cake-layer-1 {
+    width: 220px;
+    height: 60px;
+    background-color: var(--cake-color);
+    bottom: 30px;
+    z-index: 1;
+}
+
+.cake-layer-2 {
+    width: 180px;
+    height: 50px;
+    background-color: var(--cake-color);
+    bottom: 70px;
+    z-index: 2;
+}
+
+.filling {
+    width: 100%;
+    height: 10px;
+    background: var(--filling-color);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.cake-layer-1 .filling {
+    margin-top: 25px;
+}
+
+.cake-layer-2 .filling {
+    margin-top: 20px;
+}
+
+.candle {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 40px;
+    background-color: var(--candle-color);
+    border-radius: 4px;
+    z-index: 11;
+}
+
+.flame {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 15px;
+    background-color: var(--flame-color);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: flicker 1.5s infinite alternate;
+    box-shadow: 0 0 10px var(--flame-color), 0 0 20px var(--flame-color);
+}
+
+@keyframes flicker {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(0.8) translateY(2px); }
+}
+
+/* Carrossel */
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 1rem 0;
+    gap: 1rem;
+    cursor: grab;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) rgba(255, 255, 255, 0.1);
+}
+
+.carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+}
+
+.carousel::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.carousel-item {
+    flex: 0 0 auto;
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(45deg, var(--highlight-color), var(--primary-color));
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--primary-color);
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+    transform: scale(0.9);
+    filter: grayscale(30%);
+    scroll-snap-align: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.carousel-item:hover {
+    transform: scale(1);
+    filter: grayscale(0%);
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: 1.5rem;
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+    .carousel-item {
+        width: 200px;
+        height: 200px;
+    }
+}
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.carousel-item {
+    flex: 0 0 auto;
+    width: 400px;     /* Largura fixa do item do carrossel */
+    height: 300px;    /* Altura fixa */
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz a imagem preencher o espaço sem distorcer */
+    display: block;
+}
+/* Estilo padrão para desktop */
+body {
+  font-size: 18px;
+}
+
+/* Estilo para telas menores que 768px (ex: celulares) */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+}
+button {
+      background-color: #e11bc4; /* verde */
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      background-color: #af1366;
+      transform: scale(1.05);
+    }
+
+    button:active {
+      transform: scale(0.98)}
